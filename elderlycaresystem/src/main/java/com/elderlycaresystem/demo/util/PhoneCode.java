@@ -25,17 +25,17 @@ public class PhoneCode{
      * @return
      */
     public static String sendCode(String phone,String code){
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIX5WduMFKCTZb", "tmajCxT4qKk97AXU88ImlPp2OUvLMV");
+        DefaultProfile profile = DefaultProfile.getProfile("*****************", "**********", "*****************************");
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
-        request.setSysDomain("dysmsapi.aliyuncs.com");
-        request.setSysVersion("2017-05-25");
-        request.setSysAction("SendSms");
+        request.setSysDomain("***************************");
+        request.setSysVersion("*************");
+        request.setSysAction("***********************");
         request.putQueryParameter("RegionId", "cn-hangzhou");
         request.putQueryParameter("PhoneNumbers", phone);
-        request.putQueryParameter("SignName", "ER个人系统");
-        request.putQueryParameter("TemplateCode", "SMS_160856660");
+        request.putQueryParameter("SignName", "*********************");
+        request.putQueryParameter("TemplateCode", "*************************");
         request.putQueryParameter("TemplateParam", "{\"code\":"+code+"}");
         try {
             CommonResponse response = client.getCommonResponse(request);
