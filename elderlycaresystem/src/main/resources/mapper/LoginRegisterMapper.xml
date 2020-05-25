@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elderlycaresystem.demo.user.dao.UserDao">
+    <!--用户详情-->
+    <select id="queryDetails" parameterType="com.elderlycaresystem.demo.user.entity.UserEntity"  resultType="com.elderlycaresystem.demo.user.entity.UserEntity">
+        select
+            user_code as userCode,
+            user_acct as userAcct,
+            user_name as userName,
+            user_password as userPass,
+            user_email as userEmail,
+            user_phone as userPhone,
+            user_address as userAddress,
+            user_id_card as userIdCard,
+            user_role as userRole,
+            user_create_time as userCreateTime,
+            user_create_ip as userCreateIp,
+            user_update_time as userUpdateTime
+        from
+            user
+        where
+            user_code = #{userCode} and is_delete = 0;
+    </select>
+</mapper>

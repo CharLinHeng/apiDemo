@@ -1,0 +1,32 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.elderlycaresystem '
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    maven{ url 'https://maven.aliyun.com/repository/public'}
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2'
+    runtimeOnly 'mysql:mysql-connector-java'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    compile 'org.apache.poi:poi:4.1.1',
+    'org.apache.poi:poi-ooxml:4.1.1',
+    'org.apache.poi:poi-ooxml-schemas:4.1.1',
+    'com.aliyun:aliyun-java-sdk-core:4.3.3',
+    'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.10'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elderlycaresystem.demo.handleData.dao.DataDao">
+
+
+    <!--插-->
+    <insert id="addData" parameterType="com.elderlycaresystem.demo.handleData.entity.Example">
+          insert  into
+            data_copy(ID,SEX,inBorn,ViLiG,EducationRank,marti)
+          values
+            <foreach collection="list" item="item" separator=","  index="index">
+                (
+                  #{item.ID},#{item.SEX},#{item.inBorn},#{item.ViLiG},#{item.EducationRank},#{item.marti}
+                )
+            </foreach>
+    </insert>
+    <!--addTOALLDATA-->
+    <insert id="addTOALLDATA" parameterType="com.elderlycaresystem.demo.handleData.entity.DATA">
+        insert  into
+        orderinformation(HouseholdRegister,childrenHelp,marti,eduRank,heavyWill,useMachine,insertTime)
+        values
+        <foreach collection="list" item="item" separator=","  index="index">
+            (
+            CAST(#{item.HouseholdRegister} AS SIGNED),
+            CAST(#{item.childrenHelp} AS SIGNED),
+            CAST(#{item.marti} AS SIGNED),
+            CAST(#{item.eduRank} AS SIGNED),
+            CAST(#{item.heavyWill} AS SIGNED),
+            CAST(#{item.useMachine} AS SIGNED),
+            now()
+            )
+        </foreach>
+    </insert>
+    <!--插到区间-->
+    <insert id="addToQuJian" parameterType="com.elderlycaresystem.demo.handleData.entity.Example">
+        insert  into
+        dataInterval_copy(ID,inBorn,cash,moneySave,moneyFromSon,endowmentInsurance,pension)
+        values
+        <foreach collection="list" item="item" separator=","  index="index">
+            (
+            #{item.ID},#{item.inBorn},#{item.cash},#{item.moneySave},#{item.moneyFromSon},#{item.endowmentInsurance},#{item.pension}
+            )
+        </foreach>
+    </insert>
+    <!--修改第二列-->
+    <update id="updateA" parameterType="com.elderlycaresystem.demo.handleData.entity.Example">
+        <foreach collection="updatelist" item="item" index="index"  separator=";">
+            UPDATE `data_copy` SET
+            `healthy`=#{item.healthy},
+            `serieasWill`=#{item.serieasWill},
+            `sociaActive`=#{item.sociaActive},
+            `helpMachine`=#{item.helpMachine}
+            WHERE ID=#{item.ID}
+        </foreach>
+
+
+
+    </update>
+    <!--查询-->
+    <select id="query" parameterType="com.elderlycaresystem.demo.handleData.entity.Example" resultType="com.elderlycaresystem.demo.handleData.entity.Example">
+        select * from data
+    </select>
+    <!--查询2-->
+    <select id="queryInterval" parameterType="com.elderlycaresystem.demo.handleData.entity.Example" resultType="com.elderlycaresystem.demo.handleData.entity.Example">
+        select * from dataInterval
+    </select>
+
+    <!--getData-->
+    <select id="getData" parameterType="com.elderlycaresystem.demo.handleData.entity.Parameter" resultType="com.elderlycaresystem.demo.handleData.entity.Parameter">
+        select
+              ID id,
+              inBorn assistiveDevices,
+              cash educationLevel,
+              moneySave maritalStatus,
+              moneyFromSon childSupport,
+              endowmentInsurance seriousIllness,
+              pension houseHoldRegister
+        from
+              datainterval
+        limit 0,#{pageNum}
+    </select>
+    <select id="getAllData" parameterType="com.elderlycaresystem.demo.handleData.entity.Parameter" resultType="com.elderlycaresystem.demo.handleData.entity.Parameter">
+        select
+              id id,
+              useMachine assistiveDevices,
+              eduRank educationLevel,
+              marti maritalStatus,
+              childrenHelp childSupport,
+              heavyWill seriousIllness,
+              HouseholdRegister houseHoldRegister
+        from
+              orderinformation
+        limit 0,#{pageNum}
+    </select>
+</mapper>
